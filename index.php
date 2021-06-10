@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+session_start();
+
 $url = $_GET['url'] ?? '';
 
 if ($url === '' || $url === 'home') {
@@ -18,7 +20,7 @@ if ($url === '' || $url === 'home') {
     if ($url === '' || $url === 'home') {
         require 'php/templates/home.php';
     } elseif ($url === 'addform') {
-        require 'php/form/addform.php';
+        require 'php/form/loginForm.php';
     } elseif ($url === 'admin') {
         require 'php/templates/admin.php';
     } elseif ($url === 'updateform') {
@@ -27,6 +29,8 @@ if ($url === '' || $url === 'home') {
         require 'php/crud/delete.php';
     } elseif ($url === 'adminForm') {
         require 'php/form/adminForm.php';
+    } elseif ($url === 'login') {
+        require 'php/templates/login/login.php';
     } else {
         require 'php/templates/404.php';
     }

@@ -18,6 +18,7 @@ function add(string $title, string $description, string $annee, string $auteur, 
 
     } catch(PDOException $e){
         echo "Erreur : " . $e->getMessage();
+        return NULL;
     }
 }
 
@@ -41,10 +42,10 @@ function update($id, string $title, string $description, string $annee, string $
     $conn = connexion();
 
     try {
-        $sql = "UPDATE books SET title = :title, description = :description, annee = :annee, auteur = :auteur, prix = :prix, image = :image,
+        $sql = "UPDATE books SET title = :title, description = :description, annee = :annee, auteur = :auteur, prix = :prix, image = :image
                 WHERE id = :id";
         $query = $conn->prepare($sql);
-        $query->bindValue(':id', $id);
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
         $query->bindParam(':title', $title, PDO::PARAM_STR);
         $query->bindParam(':description', $description, PDO::PARAM_STR);
         $query->bindParam(':annee', $annee, PDO::PARAM_STR);
@@ -53,6 +54,7 @@ function update($id, string $title, string $description, string $annee, string $
         $query->bindParam(':image', $image, PDO::PARAM_STR);
         return $query->execute();
     } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
         return NULL;
     }
 }
@@ -68,6 +70,7 @@ function delete($id) {
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
         return NULL;
     }
 }

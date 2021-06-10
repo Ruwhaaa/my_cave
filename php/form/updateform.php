@@ -12,15 +12,8 @@ if(isset($_POST['title'], $_POST['description'], $_POST['annee'], $_POST['auteur
         $prix = valid_data($_POST['prix']);
         $image = valid_data($_POST['image']);
 
-        var_dump($id);
-        var_dump($title);
-        var_dump($description);
-        var_dump($annee);
-        var_dump($auteur);
-        var_dump($prix);
-        var_dump($image);
         update($id, $title, $description, $annee, $auteur, $prix, $image);
-        //header('location: ./admin&status=success');
+        header('location: ./admin&status=success');
     } else {
         header('location: ./admin&status=missing');
     }
