@@ -1,12 +1,12 @@
 <?php
 require ("php/database/database.php");
 
-function add(string $title, string $description, string $annee, string $auteur, float $prix, string $image) {
+function add($name, $year, $grapes, $country, $region, $description, $picture) {
 
     $conn = connexion();
 
     try {
-        $query = $conn->prepare("INSERT INTO books (title, description, annee, auteur, prix, image)
+        $query = $conn->prepare("INSERT INTO wine (name, year, grapes, country, region, description, picture)
                 VALUES (:title, :description, :annee, :auteur, :prix, :image)");
         $query->bindValue(':title',$title);
         $query->bindValue(':description',$description);
@@ -28,7 +28,7 @@ function read(): ?array
    $conn = connexion();
 
     try {
-        $query = $conn->prepare("SELECT * FROM books");
+        $query = $conn->prepare("SELECT * FROM wine");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     } catch(PDOException $e){
@@ -42,7 +42,7 @@ function update($id, string $title, string $description, string $annee, string $
     $conn = connexion();
 
     try {
-        $sql = "UPDATE books SET title = :title, description = :description, annee = :annee, auteur = :auteur, prix = :prix, image = :image
+        $sql = "UPDATE wine SET title = :title, description = :description, annee = :annee, auteur = :auteur, prix = :prix, image = :image
                 WHERE id = :id";
         $query = $conn->prepare($sql);
         $query->bindValue(':id', $id, PDO::PARAM_INT);

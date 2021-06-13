@@ -2,17 +2,18 @@
 require ("php/validation/validation.php");
 require ("php/datamanager/datamanager.php");
 
-if(isset($_POST['title'], $_POST['description'], $_POST['annee'], $_POST['auteur'], $_POST['prix'], $_POST['image'])) {
-    if(!empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['annee']) && !empty($_POST['auteur']) && !empty($_POST['prix']) && !empty($_POST['image'])) {
-        $id = $_GET['id'];
-        $title = valid_data($_POST['title']);
+if(isset($_POST['name'], $_POST['year'], $_POST['grapes'], $_POST['country'], $_POST['region'], $_POST['description'], $_POST['picture'])) {
+    if(!empty($_POST['name']) && !empty($_POST['year']) && !empty($_POST['grapes']) && !empty($_POST['country']) && !empty($_POST['region']) && !empty($_POST['description']) && !empty($_POST['picture'])) {
+        $id = valid_data($_GET['id']);
+        $name = valid_data($_POST['name']);
+        $year = valid_data($_POST['year']);
+        $grapes = valid_data($_POST['grapes']);
+        $country = valid_data($_POST['country']);
+        $region = valid_data($_POST['region']);
         $description = valid_data($_POST['description']);
-        $annee = valid_data($_POST['annee']);
-        $auteur = valid_data($_POST['auteur']);
-        $prix = valid_data($_POST['prix']);
-        $image = valid_data($_POST['image']);
+        $picture = valid_data($_POST['picture']);
 
-        update($id, $title, $description, $annee, $auteur, $prix, $image);
+        update($id, $name, $year, $grapes, $country, $region, $description, $picture);
         header('location: ./admin&status=success');
     } else {
         header('location: ./admin&status=missing');
