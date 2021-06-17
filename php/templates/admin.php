@@ -8,14 +8,18 @@ $length = count($response);
     <thead>
         <tr>
             <th>Id</th>
-            <th>Titre</th>
+            <th>Name</th>
+            <th>Year</th>
+            <th>Grapes</th>
+            <th>Country</th>
+            <th>Region</th>
             <th>Description</th>
-            <th>Date</th>
-            <th>Auteur</th>
-            <th>Prix</th>
-            <th>Image</th>
+            <th>Picture</th>
         </tr>
     </thead>
+    <?php if(isset($_GET['msg'])) : ?>
+        <p><?php echo $_GET['msg']; ?></p>
+    <?php endif; ?>
     <tbody>
         <tr>
             <form action="adminForm" method="post">
@@ -23,33 +27,39 @@ $length = count($response);
 
                 </td>
                 <td>
-                    <label for="title">
-                        <input type="text" name="title" required>
+                    <label for="name">
+                        <input type="text" name="name" id="name" required>
+                    </label>
+                </td>
+                <td>
+                    <label for="year">
+                        <input type="text" name="year" id="year" required>
+                    </label>
+                </td>
+                <td>
+                    <label for="grapes">
+                        <input type="text" name="grapes" id="grapes" required>
+                    </label>
+                </td>
+                <td>
+                    <label for="country">
+                        <input type="text" name="country" id="country" required>
+                    </label>
+                </td>
+                <td>
+                    <label for="region">
+                        <input type="text" name="region" id="region" required>
                     </label>
                 </td>
                 <td>
                     <label for="description">
-                        <input type="text" name="description" required>
+                        <input type="text" name="descriptio," required>
                     </label>
                 </td>
                 <td>
-                    <label for="annee">
-                        <input type="text" name="annee" required>
-                    </label>
-                </td>
-                <td>
-                    <label for="auteur">
-                        <input type="text" name="auteur" required>
-                    </label>
-                </td>
-                <td>
-                    <label for="prix">
-                        <input type="text" name="prix" required>
-                    </label>
-                </td>
-                <td>
-                    <label for="image">
-                        <input type="text" name="image" required>
+                    <label for="picture">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="4194304">
+                        <input type="file" name="picture" id="picture" required>
                     </label>
                 </td>
                 <td>
@@ -61,7 +71,7 @@ $length = count($response);
     <tr>
         <form action="updateform&id=<?php echo $response[$i]['id'] ?>" method="post">
         <?php foreach ($response[$i] as $key => $value): ?>
-            <?php if ($key === 'image'): ?>
+            <?php if ($key === 'picture'): ?>
                 <td>
                     <img src="src/img/<?php echo $value ?>" alt="image">
                     <label for="image">
@@ -74,7 +84,7 @@ $length = count($response);
                     <?php echo $value; ?>
                 </td>
             <?php endif; ?>
-            <?php if ($key !== 'image' && $key !== 'id'): ?>
+            <?php if ($key !== 'picture' || $key !== 'id'): ?>
                 <td>
                     <label for="<?php echo $key ?>">
                         <input type="text" name="<?php echo $key ?>" required value="<?php echo $value ?>">

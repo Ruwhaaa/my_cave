@@ -1,21 +1,22 @@
 <?php
 require ("php/database/database.php");
 
-function add($name, $year, $grapes, $country, $region, $description, $picture) {
+function add($data) {
 
     $conn = connexion();
 
     try {
         $query = $conn->prepare("INSERT INTO wine (name, year, grapes, country, region, description, picture)
-                VALUES (:title, :description, :annee, :auteur, :prix, :image)");
-        $query->bindValue(':title',$title);
-        $query->bindValue(':description',$description);
-        $query->bindValue(':annee',$annee);
-        $query->bindValue(':auteur',$auteur);
-        $query->bindValue(':prix',$prix);
-        $query->bindValue(':image',$image);
+                VALUES (:name, :year, :grapes, :country, :region, :description, picture)");
+        $query->bindValue(':name', $data['name'], PDO::PARAM_STR);
+        $query->bindValue(':year', $data['year'], PDO::PARAM_STR);
+        $query->bindValue(':grapes', $data['grapes'], PDO::PARAM_STR);
+        $query->bindValue(':country', $data['country'], PDO::PARAM_STR);
+        $query->bindValue(':region', $data['region'], PDO::PARAM_STR);
+        $query->bindValue(':description', $data['description'], PDO::PARAM_STR);
+        $query->bindValue(':picture', $data['picture'], PDO::PARAM_STR);
         $query->execute();
-
+    return TRUE;
     } catch(PDOException $e){
         echo "Erreur : " . $e->getMessage();
         return NULL;
@@ -37,22 +38,24 @@ function read(): ?array
     }
 }
 
-function update($id, string $title, string $description, string $annee, string $auteur, float $prix, string $image): ?bool {
+function update($data): ?bool {
 
     $conn = connexion();
 
     try {
-        $sql = "UPDATE wine SET title = :title, description = :description, annee = :annee, auteur = :auteur, prix = :prix, image = :image
+        $sql = "UPDATE wine SET name = :name, year = :year, grapes = :grapes, country = :country, region = :region, description = :description, picture = :picture
                 WHERE id = :id";
         $query = $conn->prepare($sql);
-        $query->bindValue(':id', $id, PDO::PARAM_INT);
-        $query->bindParam(':title', $title, PDO::PARAM_STR);
-        $query->bindParam(':description', $description, PDO::PARAM_STR);
-        $query->bindParam(':annee', $annee, PDO::PARAM_STR);
-        $query->bindParam(':auteur', $auteur, PDO::PARAM_STR);
-        $query->bindParam(':prix', $prix);
-        $query->bindParam(':image', $image, PDO::PARAM_STR);
-        return $query->execute();
+        $query->bindValue(':id', $data['id'], PDO::PARAM_STR);
+        $query->bindValue(':name', $data['name'], PDO::PARAM_STR);
+        $query->bindValue(':name', $data['name'], PDO::PARAM_STR);
+        $query->bindValue(':year', $data['year'], PDO::PARAM_STR);
+        $query->bindValue(':grapes', $data['grapes'], PDO::PARAM_STR);
+        $query->bindValue(':country', $data['country'], PDO::PARAM_STR);
+        $query->bindValue(':region', $data['region'], PDO::PARAM_STR);
+        $query->bindValue(':description', $data['description'], PDO::PARAM_STR);
+        $query->bindValue(':picture', $data['picture'], PDO::PARAM_STR);
+        return TRUE;
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage();
         return NULL;
