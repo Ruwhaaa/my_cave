@@ -1,8 +1,10 @@
 <?php
+require ('php/datamanager/datamanager.php');
 
 function html($str): string
 {
-    return htmlentities(trim($str), ENT_QUOTES);
+    return
+        htmlspecialchars(trim($str), ENT_QUOTES);
 }
 mb_internal_encoding( "UTF-8" );
 function mb_ucFirst($string): string
@@ -11,10 +13,8 @@ function mb_ucFirst($string): string
     return mb_strtoupper(mb_substr( $string, 0, 1 )) . mb_substr( $string, 1 );
 }
 
-
 $fields_required = array($_POST['name'], $_POST['year'],
-    $_POST['grapes'], $_POST['country'], $_POST['region'], $_POST['description'], $_POST['picture']);
-$set_request = FALSE;
+    $_POST['grapes'], $_POST['country'], $_POST['region'], $_POST['description']);
 if(in_array('', $fields_required)) {
     $msg_error = "merci de remplir tous les champs";
 } else {
@@ -26,26 +26,26 @@ if(in_array('', $fields_required)) {
     $description = html(mb_strtoupper($_POST['description']));
 
     $picture = $_FILES['picture'];
-    $ext = array('png', 'jpg', 'jpeg', 'gif');
+    $ext = array('png', 'jpg', 'jpeg', 'gif', 'PNG');
 
     if ($picture['error'] > 0 && $picture['error'] < 3) {
         $msg_error = "taille du fichier trop grand";
     }
-    elseif ($picture['error'] == 3 || $picture['error'] > 4) {
+    elseif ($picture['error'] === 3 || $picture['error'] > 4) {
         $msg_error = "problème pendant l'upload";
     } else {
-        if ($picture['error'] == 4) {
+        echo "première couche";
+        if ($picture['error'] === 4) {
             $picture_name = 'generic.jpg';
             $set_request = TRUE;
         } else {
             if ($picture['size'] > 4194304) {
                 $msg_error = "taille du fichier trop grand";
-            }
-            elseif (!in_array(strtolower(pathinfo($picture['name'], PATHINFO_EXTENSION)), $ext)) {
+            } elseif (!in_array(strtolower(pathinfo($picture['name'], PATHINFO_EXTENSION)), $ext)) {
                 $msg_error = "le fichier n'est pas une image";
             } else {
                 $picture_name = uniqid() . '_' . $picture['name'];
-                $img_folder = dirname(dirname(__DIR__)) . '/assets/img/';
+                $img_folder = dirname(dirname(__DIR__)) . '/src/img/';
                 @mkdir($img_folder, 0777);
                 $dir = $img_folder . $picture_name;
 
@@ -67,6 +67,18 @@ if(in_array('', $fields_required)) {
                             'picture' => $picture_name
                         );
                         update($data);
+                    } else {
+                        $data = array(
+                            'name' => $name,
+                            'year' => $year,
+                            'grapes' => $grapes,
+                            'country' => $country,
+                            'region' => $region,
+                            'description' => $description,
+                            'picture' => $picture_name
+                        );
+                        $return = add($data);
+                        echo $return;
                     }
                 }
             }
@@ -74,15 +86,7 @@ if(in_array('', $fields_required)) {
     }
 }
 
-if(isset($msg_error)) {
-    header("Location: admin?msg=$msg_error&error=true");
-}
-    if($result) {
-        $msg = "utilisateur bien créé";
-        $error = 'false';
-    }
-    else {
-        $msg = "Oups, une erreur s'est produite";
-        $error = 'true';
-    }
-    header("Location: $referer?msg=$msg&error=$error");
+    //header("Location: admin?msg=$msg_error&error=true");
+
+    //header("Location: $referer?msg=$msg&error=$error");
+//header("Location: admin");

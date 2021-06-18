@@ -22,7 +22,7 @@ $length = count($response);
     <?php endif; ?>
     <tbody>
         <tr>
-            <form action="adminForm" method="post">
+            <form action="adminForm" method="POST" enctype="multipart/form-data">
                 <td>
 
                 </td>
@@ -53,7 +53,7 @@ $length = count($response);
                 </td>
                 <td>
                     <label for="description">
-                        <input type="text" name="descriptio," required>
+                        <input type="text" name="description" required>
                     </label>
                 </td>
                 <td>
@@ -69,12 +69,12 @@ $length = count($response);
         </tr>
     <?php for ($i = 0; $i < $length; $i++): ?>
     <tr>
-        <form action="updateform&id=<?php echo $response[$i]['id'] ?>" method="post">
+        <form action="adminForm&id=<?php echo $response[$i]['id'] ?>" method="post" enctype="multipart/form-data">
         <?php foreach ($response[$i] as $key => $value): ?>
             <?php if ($key === 'picture'): ?>
                 <td>
                     <img src="src/img/<?php echo $value ?>" alt="image">
-                    <label for="image">
+                    <label for="picture">
                         <input type="text" name="image" required value="<?php echo $response[$i]['image']?>">
                     </label>
                 </td>
@@ -84,7 +84,7 @@ $length = count($response);
                     <?php echo $value; ?>
                 </td>
             <?php endif; ?>
-            <?php if ($key !== 'picture' || $key !== 'id'): ?>
+            <?php if ($key !== 'picture' && $key !== 'id'): ?>
                 <td>
                     <label for="<?php echo $key ?>">
                         <input type="text" name="<?php echo $key ?>" required value="<?php echo $value ?>">

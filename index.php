@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <?php
 session_start();
 
@@ -23,9 +23,7 @@ if ($url === '' || $url === 'home') {
         require 'php/form/loginForm.php';
     } elseif ($url === 'admin') {
         require 'php/templates/admin.php';
-    } elseif ($url === 'updateform') {
-        require 'php/form/updateform.php';
-    } elseif ($url === 'delete') {
+    }  elseif ($url === 'delete') {
         require 'php/crud/delete.php';
     } elseif ($url === 'adminForm') {
         require 'php/form/adminForm.php';
