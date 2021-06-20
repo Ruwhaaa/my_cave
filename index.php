@@ -6,9 +6,9 @@ session_start();
 $url = $_GET['url'] ?? '';
 
 if ($url === '' || $url === 'home') {
-        require 'php/head/headHome.php';
+        require 'php/templates/head/headHome.php';
     } elseif ($url === 'admin') {
-        require 'php/head/headAdmin.php';
+        require 'php/templates/head/headAdmin.php';
     }
 ?>
 
@@ -18,6 +18,7 @@ if ($url === '' || $url === 'home') {
     $url = $_GET['url'] ?? '';
 
     if ($url === '' || $url === 'home') {
+        require 'php/templates/header.php';
         require 'php/templates/home.php';
     } elseif ($url === 'addform') {
         require 'php/form/loginForm.php';

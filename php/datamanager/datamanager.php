@@ -3,7 +3,6 @@ require ("php/database/database.php");
 
 function add($data) {
 
-
     $conn = connexion();
 
     try {
@@ -24,8 +23,7 @@ function add($data) {
     }
 }
 
-function read(): ?array
-{
+function read() {
 
    $conn = connexion();
 
@@ -34,19 +32,17 @@ function read(): ?array
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     } catch(PDOException $e){
-        echo "Erreur : " . $e->getMessage();
-        return NULL;
+        return "Erreur : " . $e->getMessage();
     }
 }
 
-function update($data): ?bool {
+function update($data) {
 
     $conn = connexion();
 
     try {
-        $sql = "UPDATE wine SET name = :name, year = :year, grapes = :grapes, country = :country, region = :region, description = :description, picture = :picture
-                WHERE id = :id";
-        $query = $conn->prepare($sql);
+        $query = $conn->prepare ("UPDATE wine SET name = :name, year = :year, grapes = :grapes, country = :country, region = :region, description = :description, picture = :picture
+                WHERE id = :id");
         $query->bindValue(':id', $data['id'], PDO::PARAM_STR);
         $query->bindValue(':name', $data['name'], PDO::PARAM_STR);
         $query->bindValue(':year', $data['year'], PDO::PARAM_STR);
@@ -55,10 +51,9 @@ function update($data): ?bool {
         $query->bindValue(':region', $data['region'], PDO::PARAM_STR);
         $query->bindValue(':description', $data['description'], PDO::PARAM_STR);
         $query->bindValue(':picture', $data['picture'], PDO::PARAM_STR);
-        return TRUE;
+        return $query->execute();
     } catch (PDOException $e) {
-        echo "Erreur : " . $e->getMessage();
-        return NULL;
+        return "Erreur : " . $e->getMessage();
     }
 }
 
@@ -67,14 +62,13 @@ function delete($id) {
     $conn = connexion();
 
     try {
-        $sql = "DELETE FROM books WHERE id = :id";
+        $sql = "DELETE FROM wine WHERE id = :id";
         $query = $conn->prepare($sql);
-        $query->bindParam(':id', $id, PDO::PARAM_STR);
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        echo "Erreur : " . $e->getMessage();
-        return NULL;
+        return "Erreur : " . $e->getMessage();
     }
 }
 

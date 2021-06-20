@@ -73,9 +73,10 @@ $length = count($response);
         <?php foreach ($response[$i] as $key => $value): ?>
             <?php if ($key === 'picture'): ?>
                 <td>
-                    <img src="src/img/<?php echo $value ?>" alt="image">
+                    <img src="src/img/<?php echo $value ?>" alt="picture">
                     <label for="picture">
-                        <input type="text" name="image" required value="<?php echo $response[$i]['image']?>">
+                        <input type="file" name="picture" required value="<?php echo $response[$i]['image']?>">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="4194304">
                     </label>
                 </td>
             <?php endif; ?>
