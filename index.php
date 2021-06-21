@@ -20,9 +20,8 @@ if ($url === '' || $url === 'home') {
     if ($url === '' || $url === 'home') {
         require 'php/templates/header.php';
         require 'php/templates/home.php';
-    } elseif ($url === 'addform') {
-        require 'php/form/loginForm.php';
-    } elseif ($url === 'admin') {
+    }elseif ($url === 'admin') {
+        require 'php/templates/header.php';
         require 'php/templates/admin.php';
     }  elseif ($url === 'delete') {
         require 'php/crud/delete.php';

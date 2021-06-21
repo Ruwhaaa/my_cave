@@ -3,70 +3,35 @@ require ("php/datamanager/datamanager.php");
 $response = read();
 $length = count($response);
 ?>
-
-<table id="admin">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Year</th>
-            <th>Grapes</th>
-            <th>Country</th>
-            <th>Region</th>
-            <th>Description</th>
-            <th>Picture</th>
-        </tr>
-    </thead>
-    <?php if(isset($_GET['msg'])) : ?>
-        <p><?php echo $_GET['msg']; ?></p>
-    <?php endif; ?>
-    <tbody>
-        <tr>
-            <form action="adminForm" method="POST" enctype="multipart/form-data">
-                <td>
-
-                </td>
-                <td>
-                    <label for="name">
-                        <input type="text" name="name" id="name" required>
-                    </label>
-                </td>
-                <td>
-                    <label for="year">
-                        <input type="text" name="year" id="year" required>
-                    </label>
-                </td>
-                <td>
-                    <label for="grapes">
-                        <input type="text" name="grapes" id="grapes" required>
-                    </label>
-                </td>
-                <td>
-                    <label for="country">
-                        <input type="text" name="country" id="country" required>
-                    </label>
-                </td>
-                <td>
-                    <label for="region">
-                        <input type="text" name="region" id="region" required>
-                    </label>
-                </td>
-                <td>
-                    <label for="description">
-                        <input type="text" name="description" required>
-                    </label>
-                </td>
-                <td>
-                    <label for="picture">
-                        <input type="hidden" name="MAX_FILE_SIZE" value="4194304">
-                        <input type="file" name="picture" id="picture" required>
-                    </label>
-                </td>
-                <td>
-                    <input type="submit" value="Ajouter">
-                </td>
-            </form>
-        </tr>
+<main>
+<?php if(isset($_GET['msg'])) : ?>
+    <p><?php echo $_GET['msg']; ?></p>
+<?php endif; ?>
+<form action="adminForm" method="POST" id="add" enctype="multipart/form-data">
+        <label for="name">
+            <input type="text" name="name" id="name" placeholder="name" required>
+        </label>
+        <label for="year">
+            <input type="text" name="year" id="year" placeholder="year" required>
+        </label>
+        <label for="grapes">
+            <input type="text" name="grapes" id="grapes" placeholder="grapes" required>
+        </label>
+        <label for="country">
+            <input type="text" name="country" id="country" placeholder="country" required>
+        </label>
+        <label for="region">
+            <input type="text" name="region" id="region" placeholder="region" required>
+        </label>
+        <label for="description">
+            <input type="text" name="description" id="description" placeholder="description" required>
+        </label>
+        <label for="picture">
+            <input type="hidden" name="MAX_FILE_SIZE" value="4194304">
+            <input type="file" name="picture" id="picture" placeholder="choisir une image" required>
+        </label>
+        <input type="submit" value="Ajouter">
+</form>
     <?php for ($i = 0; $i < $length; $i++): ?>
     <tr>
         <form action="adminForm&id=<?php echo $response[$i]['id'] ?>" method="post" enctype="multipart/form-data">
@@ -94,9 +59,8 @@ $length = count($response);
             <?php endif; ?>
         <?php endforeach; ?>
         <td><input type="submit" value="update"></td>
+            <td><a href="delete&id=<?php echo $response[$i]['id'] ?>">delete</a></td>
         </form>
-        <td><a href="delete&id=<?php echo $response[$i]['id'] ?>">delete</a></td>
     </tr>
     <?php endfor; ?>
-    </tbody>
-</table>
+</main>

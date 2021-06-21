@@ -19,12 +19,12 @@ $fields_required = array($_POST['name'], $_POST['year'],
 if(in_array('', $fields_required)) {
     $msg_error = "merci de remplir tous les champs";
 } else {
-    $name = html(mb_ucFirst($_POST['name']));
+    $name = html(mb_strtoupper($_POST['name']));
     $year = html($_POST['year']);
     $grapes = html(mb_strtoupper($_POST['grapes']));
     $country = html(mb_strtoupper($_POST['country']));
     $region = html(mb_strtoupper($_POST['region']));
-    $description = html(mb_strtoupper($_POST['description']));
+    $description = html($_POST['description']);
 
     $picture = $_FILES['picture'];
     $ext = array('png', 'jpg', 'jpeg', 'gif', 'PNG');

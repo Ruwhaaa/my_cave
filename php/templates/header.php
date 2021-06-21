@@ -1,15 +1,16 @@
 <header>
+    <h1><span class="my">MY</span><span class="cave">CAVE</span></h1>
     <nav>
         <ul>
-            <li>Home</li>
-            <li>S'inscrire</li>
+            <li><a href="home">Home</a></li>
+            <li><a href="admin">Admin</a></li>
             <li>
                 <form action="../../../index.php" method="post">
                     <label for="pseudo">
-                        <input type="text" id="pseudo" name="pseudo" value="pseudo">
+                        <input type="text" id="pseudo" name="pseudo" placeholder="pseudo">
                     </label>
                     <label for="mdp">
-                        <input type="password" id="mdp" name="mdp" value="mot de passe">
+                        <input type="password" id="mdp" name="mdp" placeholder="mot de passe">
                     </label>
                     <input type="submit" value="Ce connecter">
                 </form>
