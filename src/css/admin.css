@@ -8,7 +8,7 @@ body {
     display: flex;
     justify-content: center;
     color: #FFFAFA;
-    background-color: #0c0c0c;
+    background-color: #86002B;
     font-size: 1rem;
 }
 
@@ -84,12 +84,128 @@ header > nav > ul > li > form > input {
     font-weight: 500;
 }
 
+.space > label > input, #display > form > label > input {
+    background-color: #FFFAFA;
+    font-family: "Roboto", sans-serif;
+    border: none;
+    font-weight: 700;
+    padding: 5px;
+}
+
+.bottom > label > input {
+
+}
+
+form > .bottom >.button > input {
+    font-family: "Roboto", sans-serif;
+    padding: 8px;
+    border: none;
+    background-color: #86002B;
+    color: #FFFAFA;
+    font-weight: 500;
+}
+
+#display > form > .bottom > input {
+    font-family: "Roboto", sans-serif;
+    padding: 8px;
+    border: none;
+    background-color: #86002B;
+    margin-top: 30px;
+    color: #FFFAFA;
+    font-weight: 500;
+}
+
+form > .bottom >.button > button {
+    font-size: 0.8rem;
+    font-family: "Roboto", sans-serif;
+    text-decoration: none;
+    padding: 9px;
+    border: none;
+    background-color: #86002B;
+    color: #FFFAFA;
+    font-weight: 500;
+}
+
+form > .bottom >.button > button > a {
+    text-decoration: none;
+    color: #FFFAFA;
+}
+
 .cave {
     color: #86002B;
 }
 
-#add {
-    margin-top: 80px;
+#display {
+    display: flex;
+    margin-top: 120px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#display > form {
+    padding: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-color: #0c0c0c;
+    max-width: 400px;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.picture {
+    height: 100%;
+    background-color: rgba(128, 0, 43, 0.8);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 35px;
+}
+
+.bottom {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.file {
+    padding: 20px;
+}
+
+.space {
+    padding: 3px;
+}
+
+.space > h4 {
+    font-weight: 500;
+    padding-bottom: 3px;
+}
+
+.between {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+::-webkit-file-upload-button {
+    font-size: 0.8rem;
+    font-family: "Roboto", sans-serif;
+    text-decoration: none;
+    padding: 9px;
+    border: none;
+    background-color: #86002B;
+    color: #FFFAFA;
+    font-weight: 500;
+}
+
+.card {
+    margin-bottom: 80px;
 }
 
 img {
