@@ -1,10 +1,9 @@
 <?php
-require 'datamanager.php';
+require 'php/datamanager/datamanager.php';
 
-$login = $_POST['login'];
-$password = $_POST['password'];
+$fields_required = array($_POST['login'], $_POST['password']);
 
-if(in_array('', $_POST)) {
+if(in_array('', $fields_required)) {
     $msg_error = '';
     if(empty($login)) {
         $msg_error .= 'Merci de renseigner votre login<br>';

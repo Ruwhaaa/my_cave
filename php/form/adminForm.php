@@ -80,7 +80,7 @@ if(in_array('', $fields_required)) {
                         $return = add($data);
                     }
                     if($return) {
-                        $msg = "utilisateur bien crée";
+                        $msg = "bouteille bien ajoutée";
                         $error = 'false';
                     }
                     else {
@@ -92,4 +92,8 @@ if(in_array('', $fields_required)) {
             }
         }
     }
+}
+
+if(isset($msg_error)) {
+    header("Location: admin?msg=$msg_error&error=true");
 }
