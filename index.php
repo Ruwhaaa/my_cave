@@ -26,9 +26,9 @@ if ($url === '' || $url === 'home') {
     }  elseif ($url === 'delete') {
         require 'php/models/delete.php';
     } elseif ($url === 'adminForm') {
-        require 'php/controller/adminForm.php';
-    } elseif ($url === 'login') {
-        require 'php/controller/loginController.php';
+        require 'php/controller/adminController.php';
+    } elseif ($url === 'register') {
+        require 'php/controller/registerController.php';
     } else {
         require 'php/templates/404.php';
     }

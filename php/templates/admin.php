@@ -27,7 +27,7 @@ $length = count($response);
                 <div class="bottom">
                     <label for="picture">
                         <input type="hidden" name="MAX_FILE_SIZE" value="4194304">
-                        <input type="file" name="picture" id="picture" placeholder="choisir une image" required>
+                        <input type="file" name="picture" placeholder="choisir une image" required>
                     </label>
                     <input type="submit" value="Ajouter">
                 </div>
@@ -59,8 +59,9 @@ $length = count($response);
                 </div>
                 <div class="bottom">
                     <label for="picture" class="file">
-                        <input type="file" name="picture" required>
+                        <input type="file" name="picture">
                         <input type="hidden" name="MAX_FILE_SIZE" value="4194304">
+                        <input type="hidden" name="picture_db" value="<?php echo $value ?>">
                     </label>
                     <div class="button">
                         <button type="submit" value="update">update</button>

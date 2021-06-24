@@ -10,7 +10,7 @@ $length = count($response);
     </section>
     <section id="form">
         <h2>Inscription</h2>
-        <form action="login" method="post">
+        <form action="register" method="post">
             <label for="pseudo">
                 <input type="text" id="pseudo" name="pseudo" placeholder="pseudo">
             </label>
@@ -18,12 +18,11 @@ $length = count($response);
                 <input type="password" id="mdp" name="mdp" placeholder="mot de passe">
             </label>
             <label for="confirm_mdp">
-                <input type="password" id="confirm_mdp" name="confirm_mdp" placeholder="mot de passe">
+                <input type="password" id="confirm_mdp" name="confirm_mdp" placeholder="confirm mot de passe">
             </label>
             <input type="submit" value="S'inscrire">
         </form>
     </section>
-</main>
 <section id="display">
     <?php for ($i = 0; $i < $length; $i++): ?>
     <div class="bottle">
