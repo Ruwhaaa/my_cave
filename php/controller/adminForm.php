@@ -1,5 +1,5 @@
 <?php
-require ('php/datamanager/datamanager.php');
+require('php/models/dataManager.php');
 mb_internal_encoding( "UTF-8" );
 
 function html($str): string
@@ -15,7 +15,7 @@ function mb_ucFirst($string): string
 }
 
 $fields_required = array($_POST['name'], $_POST['year'],
-    $_POST['grapes'], $_POST['country'], $_POST['region'], $_POST['description']);
+    $_POST['grapes'], $_POST['country'], $_POST['region'], $_POST['description'], $_FILES['picture']);
 if(in_array('', $fields_required)) {
     $msg_error = "merci de remplir tous les champs";
 } else {
@@ -81,11 +81,11 @@ if(in_array('', $fields_required)) {
                     }
                     if($return) {
                         $msg = "bouteille bien ajoutée";
-                        $error = 'false';
+                        $error = FALSE;
                     }
                     else {
                         $msg = "Oups, une erreur s'est produite";
-                        $error = 'true';
+                        $error = TRUE;
                     }
                     header("Location: admin?msg=$msg&error=$error");
                 }

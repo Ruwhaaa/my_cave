@@ -24,11 +24,11 @@ if ($url === '' || $url === 'home') {
         require 'php/templates/header.php';
         require 'php/templates/admin.php';
     }  elseif ($url === 'delete') {
-        require 'php/crud/delete.php';
+        require 'php/models/delete.php';
     } elseif ($url === 'adminForm') {
-        require 'php/form/adminForm.php';
+        require 'php/controller/adminForm.php';
     } elseif ($url === 'login') {
-        require 'php/templates/login/login.php';
+        require 'php/controller/loginController.php';
     } else {
         require 'php/templates/404.php';
     }

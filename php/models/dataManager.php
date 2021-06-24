@@ -1,5 +1,5 @@
 <?php
-require ("php/database/database.php");
+require_once("php/models/database.php");
 
 function add($data) {
 

@@ -1,5 +1,5 @@
 <?php
-require 'php/datamanager/datamanager.php';
+require 'php/models/dataManager.php';
 
 $fields_required = array($_POST['login'], $_POST['password']);
 

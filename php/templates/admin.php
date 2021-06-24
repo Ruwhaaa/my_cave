@@ -1,12 +1,9 @@
 <?php
-require ("php/datamanager/datamanager.php");
+require_once("php/models/dataManager.php");
 $response = read();
 $length = count($response);
 ?>
 <main>
-<?php if(isset($_GET['msg'])) : ?>
-    <p><?php echo $_GET['msg']; ?></p>
-<?php endif; ?>
     <section id="display">
         <form action="adminForm" method="POST" id="add" enctype="multipart/form-data" class="card">
                 <label for="name">

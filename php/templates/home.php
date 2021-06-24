@@ -1,5 +1,5 @@
 <?php
-require ("php/datamanager/datamanager.php");
+require("php/models/dataManager.php");
 $response = read();
 $length = count($response);
 ?>
@@ -10,7 +10,7 @@ $length = count($response);
     </section>
     <section id="form">
         <h2>Inscription</h2>
-        <form action="../../../index.php" method="post">
+        <form action="login" method="post">
             <label for="pseudo">
                 <input type="text" id="pseudo" name="pseudo" placeholder="pseudo">
             </label>
