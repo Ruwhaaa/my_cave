@@ -1,5 +1,5 @@
 <?php
-require_once("php/models/database.php");
+require("php/models/database.php");
 
 function add($data) {
 
@@ -67,6 +67,34 @@ function delete($id) {
         $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return "Erreur : " . $e->getMessage();
+    }
+}
+
+function login($data) {
+
+    $conn = connexion();
+
+    try {
+        $query = $conn->prepare("SELECT pseudo, mdp FROM user WHERE pseudo = :pseudo");
+        $query->bindValue(':pseudo', $data['pseudo']);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return "Erreur : " . $e->getMessage();
+    }
+}
+
+function signUp($data): string {
+    $conn = connexion();
+
+    try {
+        $query = $conn->prepare("INSERT INTO user(pseudo, mdp) VALUES (:pseudo, :mdp)");
+        $query->bindValue(':pseudo', $data['pseudo']);
+        $query->bindValue(':mdp', $data['mdp']);
+        $query->execute();
+        return TRUE;
     } catch (PDOException $e) {
         return "Erreur : " . $e->getMessage();
     }

@@ -29,6 +29,10 @@ if ($url === '' || $url === 'home') {
         require 'php/controller/adminController.php';
     } elseif ($url === 'register') {
         require 'php/controller/registerController.php';
+    } elseif ($url === 'login') {
+        require 'php/controller/loginController.php';
+    } elseif ($url === 'kill') {
+        require 'php/models/kill.php';
     } else {
         require 'php/templates/404.php';
     }

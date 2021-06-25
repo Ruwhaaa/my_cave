@@ -4,16 +4,23 @@
         <nav>
             <ul>
                 <li><a href="home">Home</a></li>
-                <li><a href="admin">Admin</a></li>
+                <?php if (isset($_SESSION['pseudo'])): ?>
+                    <li><a href="admin">Admin</a></li>
+                <?php endif; ?>
                 <li>
-                    <form action="../../../index.php" method="post">
+                    <form action="<?php if (!isset($_SESSION['pseudo'])) echo 'login'?>" method="post">
                         <label for="pseudo">
                             <input type="text" id="pseudo" name="pseudo" placeholder="pseudo">
                         </label>
                         <label for="mdp">
                             <input type="password" id="mdp" name="mdp" placeholder="mot de passe">
                         </label>
-                        <input type="submit" value="Ce connecter">
+                        <?php if (!isset($_SESSION['pseudo'])): ?>
+                            <input type="submit" value="Ce connecter">
+                        <?php endif; ?>
+                        <?php if (isset($_SESSION['pseudo'])): ?>
+                            <a href="kill">Ce déconnecter</a>
+                        <?php endif; ?>
                     </form>
                 </li>
             </ul>

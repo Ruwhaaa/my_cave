@@ -71,6 +71,19 @@ header > nav > ul > li > form > label > input {
     margin-left: 10px;
 }
 
+form > a {
+    margin-left: 30px;
+    padding: 5px;
+    font-size: 0.8rem;
+    font-family: "Roboto", sans-serif;
+    list-style: none;
+    text-decoration: none;
+    border: none;
+    background-color: #86002B;
+    color: #FFFAFA;
+    font-weight: 500;
+}
+
 header > nav > ul > li > form > input {
     margin-left: 30px;
     padding: 5px;

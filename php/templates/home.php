@@ -8,6 +8,7 @@ $length = count($response);
     <section id="cover">
 
     </section>
+    <?php if (!isset($_SESSION['pseudo'])): ?>
     <section id="form">
         <h2>Inscription</h2>
         <form action="register" method="post">
@@ -23,6 +24,7 @@ $length = count($response);
             <input type="submit" value="S'inscrire">
         </form>
     </section>
+    <?php endif; ?>
 <section id="display">
     <?php for ($i = 0; $i < $length; $i++): ?>
     <div class="bottle">

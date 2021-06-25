@@ -1,18 +1,8 @@
 <?php
-require('php/models/dataManager.php');
+require_once('php/models/dataManager.php');
+require_once ('php/models/validation.php');
+
 mb_internal_encoding( "UTF-8" );
-
-function html($str): string
-{
-    return
-        htmlspecialchars(trim($str), ENT_QUOTES);
-}
-
-function mb_ucFirst($string): string
-{
-    $string = mb_strtolower($string);
-    return mb_strtoupper(mb_substr( $string, 0, 1 )) . mb_substr( $string, 1 );
-}
 
 $fields_required = array($_POST['name'], $_POST['year'],
     $_POST['grapes'], $_POST['country'], $_POST['region'], $_POST['description']);
