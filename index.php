@@ -6,9 +6,9 @@ session_start();
 $url = $_GET['url'] ?? '';
 
 if ($url === '' || $url === 'home') {
-        require 'php/templates/head/headHome.php';
+        require 'php/pageTemplate/head/headHome.php';
     } elseif ($url === 'admin') {
-        require 'php/templates/head/headAdmin.php';
+        require 'php/pageTemplate/head/headAdmin.php';
     }
 ?>
 
@@ -18,23 +18,23 @@ if ($url === '' || $url === 'home') {
     $url = $_GET['url'] ?? '';
 
     if ($url === '' || $url === 'home') {
-        require 'php/templates/header.php';
-        require 'php/templates/home.php';
+        require 'php/pageTemplate/header.php';
+        require 'php/pageTemplate/home.php';
     }elseif ($url === 'admin') {
-        require 'php/templates/header.php';
-        require 'php/templates/admin.php';
+        require 'php/pageTemplate/header.php';
+        require 'php/pageTemplate/admin.php';
     }  elseif ($url === 'delete') {
-        require 'php/models/delete.php';
+        require 'php/database/delete.php';
     } elseif ($url === 'adminForm') {
-        require 'php/controller/adminController.php';
+        require 'php/pageLogic/adminController.php';
     } elseif ($url === 'register') {
-        require 'php/controller/registerController.php';
+        require 'php/pageLogic/registerController.php';
     } elseif ($url === 'login') {
-        require 'php/controller/loginController.php';
+        require 'php/pageLogic/loginController.php';
     } elseif ($url === 'kill') {
-        require 'php/models/kill.php';
+        require 'php/database/kill.php';
     } else {
-        require 'php/templates/404.php';
+        require 'php/pageTemplate/404.php';
     }
 ?>
 </body>
