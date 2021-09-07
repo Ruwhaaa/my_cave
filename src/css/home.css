@@ -218,3 +218,10 @@ footer > section {
     height: 200px;
     background-color: #86002B;
 }
+
+@media (max-width: 600px) {
+    header {
+        display: none;
+
+    }
+}
