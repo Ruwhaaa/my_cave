@@ -3,9 +3,9 @@
         <h1><span class="my">MY</span><span class="cave">CAVE</span></h1>
         <nav>
             <ul>
-                <li><a href="../../index.php">Home</a></li>
+                <li><a href="home">Home</a></li>
                 <?php if (isset($_SESSION['pseudo'])): ?>
-                    <li><a href="../../index.php">Admin</a></li>
+                    <li><a href="admin">Admin</a></li>
                 <?php endif; ?>
                 <li>
                     <form action="<?php if (!isset($_SESSION['pseudo'])) echo 'login'?>" method="post">
@@ -19,7 +19,7 @@
                             <input type="submit" value="Ce connecter">
                         <?php endif; ?>
                         <?php if (isset($_SESSION['pseudo'])): ?>
-                            <a href="../../index.php">Ce déconnecter</a>
+                            <a href="kill">Ce déconnecter</a>
                         <?php endif; ?>
                     </form>
                 </li>

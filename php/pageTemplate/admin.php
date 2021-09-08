@@ -9,7 +9,7 @@ $length = count($response);
 ?>
 <main>
     <section id="display">
-        <form action="../../index.php" method="POST" id="add" enctype="multipart/form-data" class="card">
+        <form action="adminForm" method="POST" id="add" enctype="multipart/form-data" class="card">
                 <label for="name">
                     <input type="text" name="name" id="name" placeholder="name" required>
                 </label>

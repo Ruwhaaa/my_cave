@@ -11,7 +11,7 @@ $length = count($response);
     <?php if (!isset($_SESSION['pseudo'])): ?>
     <section id="form">
         <h2>Inscription</h2>
-        <form action="../../index.php" method="post">
+        <form action="register" method="post">
             <label for="pseudo">
                 <input type="text" id="pseudo" name="pseudo" placeholder="pseudo">
             </label>
