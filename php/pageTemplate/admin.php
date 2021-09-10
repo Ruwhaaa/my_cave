@@ -3,7 +3,7 @@ if (!isset($_SESSION['pseudo'])) {
     $msg_error = "oups tu n'as pas le droit d'aller ici";
     header("Location: home?msg=$msg_error&error=true");
 }
-require_once("php/models/dataManager.php");
+require_once("php/database/dataManager.php");
 $response = read();
 $length = count($response);
 ?>
