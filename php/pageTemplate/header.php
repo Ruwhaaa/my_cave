@@ -1,6 +1,11 @@
 <div class="container">
     <header>
-        <h1><span class="my">MY</span><span class="cave">CAVE</span></h1>
+        <div class="mobile">
+            <h1><span class="my">MY</span><span class="cave">CAVE</span></h1>
+            <div id="burger">
+                <i class="fas fa-bars fa-2x"></i>
+            </div>
+        </div>
         <nav>
             <ul>
                 <li><a href="home">Home</a></li>

@@ -36,6 +36,8 @@ if ($url === '' || $url === 'home') {
     } else {
         require 'php/pageTemplate/404.php';
     }
+
 ?>
 </body>
+<script src="js/index.js"></script>
 </html>
