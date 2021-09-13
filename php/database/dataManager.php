@@ -1,14 +1,22 @@
 <?php
 require("php/database/database.php");
 
-function add($data) {
+function add($data)
+{
 
     $conn = connexion();
 
     try {
+
         $query = $conn->prepare("
-                INSERT INTO wine(name, year, grapes, country, region, description, picture)
-                VALUES(:name, :year, :grapes, :country, :region, :description, :picture)
+                INSERT INTO bottle_picture(picture)
+                VALUES(:picture);");
+        $query->bindValue(':picture', $data['picture']);
+        $query->execute();
+
+        $query = $conn->prepare("
+                INSERT INTO wine(name, year, grapes, country, region, description, picture_id)
+                VALUES(:name, :year, :grapes, :country, :region, :description, LAST_INSERTED_ID())
                 ");
         $query->bindValue(':name', $data['name']);
         $query->bindValue(':year', $data['year']);
@@ -16,19 +24,19 @@ function add($data) {
         $query->bindValue(':country', $data['country']);
         $query->bindValue(':region', $data['region']);
         $query->bindValue(':description', $data['description']);
-        $query->bindValue(':picture', $data['picture']);
-    return $query->execute();
-    } catch(PDOException $e){
+        return $query->execute();
+    } catch (PDOException $e) {
         return "Erreur : " . $e->getMessage();
     }
 }
 
 function read() {
 
+
    $conn = connexion();
 
     try {
-        $query = $conn->prepare("SELECT * FROM wine");
+        $query = $conn->prepare("SELECT * FROM wine INNER JOIN bottle_picture WHERE id_bottle = picture_id");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     } catch(PDOException $e){

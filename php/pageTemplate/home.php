@@ -6,7 +6,6 @@ $length = count($response);
 
 <main>
     <section id="cover">
-
     </section>
     <?php if (!isset($_SESSION['pseudo'])): ?>
     <section id="form">
@@ -39,4 +38,7 @@ $length = count($response);
     </div>
     <?php endfor; ?>
 </section>
-<?php require_once "footer.php"; ?>
+<?php require_once "footer.php";
+
+var_dump($response);
+?>
