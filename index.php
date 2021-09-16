@@ -5,11 +5,13 @@ session_start();
 
 $url = $_GET['url'] ?? '';
 
-if ($url === '' || $url === 'home') {
+    if ($url === '' || $url === 'home') {
         require 'php/pageTemplate/head/headHome.php';
     } elseif ($url === 'admin') {
         require 'php/pageTemplate/head/headAdmin.php';
-    }
+    } else {
+        require 'php/pageTemplate/head/head404.php';
+}
 ?>
 
 <body>
@@ -33,6 +35,8 @@ if ($url === '' || $url === 'home') {
         require 'php/pageLogic/loginController.php';
     } elseif ($url === 'kill') {
         require 'php/database/kill.php';
+    } elseif ($url === 'search') {
+        require 'php/pageLogic/searchController.php';
     } else {
         require 'php/pageTemplate/404.php';
     }

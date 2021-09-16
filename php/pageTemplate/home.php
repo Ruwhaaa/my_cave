@@ -1,6 +1,10 @@
 <?php
 require("php/database/dataManager.php");
-$response = read();
+if (isset($_GET['result'])) {
+    $response = search($_GET['result']);
+} else {
+    $response = read();
+}
 $length = count($response);
 ?>
 
@@ -24,12 +28,26 @@ $length = count($response);
         </form>
     </section>
     <?php endif; ?>
+    <h2>Nos Bouteilles</h2>
+    <section id="searchbar">
+        <form action="search&page=home" method="POST" id="add" enctype="multipart/form-data">
+            <label for="search">
+                <input type="text" name="search" id="search" placeholder="tappez ici la boutaille recherché" required>
+            </label>
+            <input type="submit" value="Rechercher">
+        </form>
+    </section>
 <section id="display">
+    <?php if ($length === 0): ?>
+        <div class="no_result">
+            <h3>Pas de résultat pour cette recherche !</h3>
+        </div>
+    <?php endif; ?>
     <?php for ($i = 0; $i < $length; $i++): ?>
     <div class="bottle">
         <div class="char">
-            <h3><?php echo $response[$i]['name'] . ' ' .$response[$i]['year'] . '  -  ' . $response[$i]['grapes']?></h3>
-            <h4><?php echo $response[$i]['region'] . '  -  ' .$response[$i]['country'] ?></h4>
+            <h3><?php echo $response[$i]['nom'] . ' ' .$response[$i]['annee'] . '  -  ' . $response[$i]['cepage']?></h3>
+            <h4><?php echo $response[$i]['region'] . '  -  ' .$response[$i]['pays'] ?></h4>
             <p><?php echo $response[$i]['description'] ?></p>
         </div>
         <div class="wine">
@@ -38,7 +56,7 @@ $length = count($response);
     </div>
     <?php endfor; ?>
 </section>
+</main>
 <?php require_once "footer.php";
 
-var_dump($response);
 ?>

@@ -19,6 +19,8 @@ if (in_array('', $fields_required)) {
     $user = login($data);
     if ($pseudo === $user['pseudo'] && password_verify(($_POST['mdp']), $user['mdp'])) {
         $_SESSION['pseudo'] = $_POST['pseudo'];
+        $role = role($_SESSION['pseudo']);
+        $_SESSION['role'] = $role[0]['role'];
         header("location: home?msg=Bienvenue $pseudo&error=false");
     } else {
         header("location: home?msg=Il semble que vos identifiants soit incorrects :( &error=true");

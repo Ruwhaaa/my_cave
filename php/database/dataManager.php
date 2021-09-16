@@ -9,22 +9,23 @@ function add($data)
     try {
 
         $query = $conn->prepare("
-                INSERT INTO bottle_picture(picture)
+                INSERT INTO wine_picture(picture)
                 VALUES(:picture);");
         $query->bindValue(':picture', $data['picture']);
         $query->execute();
+        $last_id = $conn->lastInsertId();
 
-        $query = $conn->prepare("
-                INSERT INTO wine(name, year, grapes, country, region, description, picture_id)
-                VALUES(:name, :year, :grapes, :country, :region, :description, LAST_INSERTED_ID())
+        $query_wine = $conn->prepare("
+                INSERT INTO wine(nom, annee, cepage, pays, region, description, id_wine_picture)
+                VALUES(:nom, :annee, :cepage, :pays, :region, :description, $last_id)
                 ");
-        $query->bindValue(':name', $data['name']);
-        $query->bindValue(':year', $data['year']);
-        $query->bindValue(':grapes', $data['grapes']);
-        $query->bindValue(':country', $data['country']);
-        $query->bindValue(':region', $data['region']);
-        $query->bindValue(':description', $data['description']);
-        return $query->execute();
+        $query_wine->bindValue(':nom', $data['nom']);
+        $query_wine->bindValue(':annee', $data['annee']);
+        $query_wine->bindValue(':cepage', $data['cepage']);
+        $query_wine->bindValue(':pays', $data['pays']);
+        $query_wine->bindValue(':region', $data['region']);
+        $query_wine->bindValue(':description', $data['description']);
+        return $query_wine->execute();
     } catch (PDOException $e) {
         return "Erreur : " . $e->getMessage();
     }
@@ -36,7 +37,8 @@ function read() {
    $conn = connexion();
 
     try {
-        $query = $conn->prepare("SELECT * FROM wine INNER JOIN bottle_picture WHERE id_bottle = picture_id");
+        $query = $conn->prepare("SELECT * FROM wine INNER JOIN wine_picture
+        WHERE id_picture = id_wine_picture");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     } catch(PDOException $e){
@@ -49,17 +51,26 @@ function update($data) {
     $conn = connexion();
 
     try {
-        $query = $conn->prepare ("UPDATE wine SET name = :name, year = :year, grapes = :grapes, country = :country, region = :region, description = :description, picture = :picture
+        $query = $conn->prepare ("UPDATE wine SET nom = :nom, annee = :annee,
+                cepage = :cepage, pays = :pays, region = :region, description = :description,
+                id_wine_picture = :id_wine_picture
                 WHERE id = :id");
-        $query->bindValue(':id', $data['id'], PDO::PARAM_STR);
-        $query->bindValue(':name', $data['name'], PDO::PARAM_STR);
-        $query->bindValue(':year', $data['year'], PDO::PARAM_STR);
-        $query->bindValue(':grapes', $data['grapes'], PDO::PARAM_STR);
-        $query->bindValue(':country', $data['country'], PDO::PARAM_STR);
-        $query->bindValue(':region', $data['region'], PDO::PARAM_STR);
-        $query->bindValue(':description', $data['description'], PDO::PARAM_STR);
-        $query->bindValue(':picture', $data['picture'], PDO::PARAM_STR);
-        return $query->execute();
+        $query->bindValue(':id', $data['id']);
+        $query->bindValue(':nom', $data['nom']);
+        $query->bindValue(':annee', $data['annee']);
+        $query->bindValue(':cepage', $data['cepage']);
+        $query->bindValue(':pays', $data['pays']);
+        $query->bindValue(':region', $data['region']);
+        $query->bindValue(':description', $data['description']);
+        $query->bindValue(':id_wine_picture', $data['id_wine_picture']);
+        $query->execute();
+
+        $query_wine = $conn->prepare ("UPDATE wine_picture SET picture = :picture
+                WHERE id_picture = :id_picture");
+        $query_wine->bindValue(':id_picture', $data['id_picture']);
+        $query_wine->bindValue(':picture', $data['picture']);
+
+        return $query_wine->execute();
     } catch (PDOException $e) {
         return "Erreur : " . $e->getMessage();
     }
@@ -70,8 +81,7 @@ function delete($id) {
     $conn = connexion();
 
     try {
-        $sql = "DELETE FROM wine WHERE id = :id";
-        $query = $conn->prepare($sql);
+        $query = $conn->prepare("DELETE FROM wine WHERE id = :id");
         $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
@@ -107,4 +117,36 @@ function signUp($data): string {
         return "Erreur : " . $e->getMessage();
     }
 }
+
+function search($data) {
+
+
+    $conn = connexion();
+    $search = $data;
+
+    try {
+        $query = $conn->prepare("SELECT * FROM wine INNER JOIN wine_picture ON
+        wine.id_wine_picture = wine_picture.id_picture WHERE wine.name LIKE '%$search%'");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e){
+        return "Erreur : " . $e->getMessage();
+    }
+}
+
+function role($data) {
+
+
+    $conn = connexion();
+    $search = $data;
+
+    try {
+        $query = $conn->prepare("SELECT * FROM user WHERE pseudo LIKE '%$data%'");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e){
+        return "Erreur : " . $e->getMessage();
+    }
+}
+
 

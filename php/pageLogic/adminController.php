@@ -4,17 +4,17 @@ require_once('php/database/validation.php');
 
 mb_internal_encoding( "UTF-8" );
 
-$fields_required = array($_POST['name'], $_POST['year'],
-    $_POST['grapes'], $_POST['country'], $_POST['region'], $_POST['description']);
+$fields_required = array($_POST['nom'], $_POST['annee'],
+    $_POST['cepage'], $_POST['pays'], $_POST['region'], $_POST['description']);
 if(in_array('', $fields_required)) {
     $msg_error = "merci de remplir tous les champs";
-} elseif ($_POST['year'] > 2021){
+} elseif ($_POST['annee'] > 2021){
     $msg_error = "nous ne somme pas encore dans le futur";
 } else {
-    $name = html(mb_strtoupper($_POST['name']));
-    $year = html($_POST['year']);
-    $grapes = html(mb_strtoupper($_POST['grapes']));
-    $country = html(mb_strtoupper($_POST['country']));
+    $name = html(mb_strtoupper($_POST['nom']));
+    $year = html($_POST['annee']);
+    $grapes = html(mb_strtoupper($_POST['cepage']));
+    $country = html(mb_strtoupper($_POST['pays']));
     $region = html(mb_strtoupper($_POST['region']));
     $description = html($_POST['description']);
 
@@ -23,17 +23,21 @@ if(in_array('', $fields_required)) {
     $ext = array('png', 'jpg', 'jpeg', 'gif', 'PNG');
     if (empty($picture['name'])) {
         $picture = $_POST['picture_db'];
-        if (isset($_GET['id'])) {
+        if (isset($_GET['id']) && isset($_GET['id_wine_picture']) && isset($_GET['id_picture'])) {
             $id = html($_GET['id']);
+            $wine_id = html($_GET['id_wine_picture']);
+            $picture_id = html($_GET['id_picture']);
             $data = array(
                 'id' => $id,
-                'name' => $name,
-                'year' => $year,
-                'grapes' => $grapes,
-                'country' => $country,
+                'nom' => $name,
+                'annee' => $year,
+                'cepage' => $grapes,
+                'pays' => $country,
                 'region' => $region,
                 'description' => $description,
-                'picture' => $picture
+                'picture' => $picture,
+                'id_wine_picture' => $wine_id,
+                'id_picture' => $picture_id
             );
             $return = update($data);
             if ($return) {
@@ -76,25 +80,29 @@ if(in_array('', $fields_required)) {
                 if (!$move_file) {
                     $msg_error = "problème pendant l'upload";
                 } else {
-                    if (isset($_GET['id'])) {
+                    if (isset($_GET['id']) && isset($_GET['id_wine_picture']) && isset($_GET['id_picture'])) {
                         $id = html($_GET['id']);
+                        $wine_id = html($_GET['id_wine_picture']);
+                        $picture_id = html($_GET['id_picture']);
                         $data = array(
                             'id' => $id,
-                            'name' => $name,
-                            'year' => $year,
-                            'grapes' => $grapes,
-                            'country' => $country,
+                            'nom' => $name,
+                            'annee' => $year,
+                            'cepage' => $grapes,
+                            'pays' => $country,
                             'region' => $region,
                             'description' => $description,
-                            'picture' => $picture_name
+                            'picture' => $picture_name,
+                            'id_wine_picture' => $wine_id,
+                            'id_picture' => $picture_id
                         );
                         $return = update($data);
                     } else {
                         $data = array(
-                            'name' => $name,
-                            'year' => $year,
-                            'grapes' => $grapes,
-                            'country' => $country,
+                            'nom' => $name,
+                            'annee' => $year,
+                            'cepage' => $grapes,
+                            'pays' => $country,
                             'region' => $region,
                             'description' => $description,
                             'picture' => $picture_name

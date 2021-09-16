@@ -9,7 +9,7 @@
         <nav>
             <ul>
                 <li><a href="home">Home</a></li>
-                <?php if (isset($_SESSION['pseudo'])): ?>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === '1'): ?>
                     <li><a href="admin">Admin</a></li>
                 <?php endif; ?>
                 <li>
