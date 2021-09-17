@@ -126,7 +126,7 @@ function search($data) {
 
     try {
         $query = $conn->prepare("SELECT * FROM wine INNER JOIN wine_picture ON
-        wine.id_wine_picture = wine_picture.id_picture WHERE wine.name LIKE '%$search%'");
+        wine.id_wine_picture = wine_picture.id_picture WHERE wine.nom LIKE '%$search%'");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     } catch(PDOException $e){

@@ -21,7 +21,7 @@ if(in_array('', $fields_required)) {
     $picture = $_FILES['picture'];
 
     $ext = array('png', 'jpg', 'jpeg', 'gif', 'PNG');
-    if (empty($picture['name'])) {
+    if (empty($picture['name']) && !empty($_POST['picture_db']) ) {
         $picture = $_POST['picture_db'];
         if (isset($_GET['id']) && isset($_GET['id_wine_picture']) && isset($_GET['id_picture'])) {
             $id = html($_GET['id']);
@@ -59,17 +59,16 @@ if(in_array('', $fields_required)) {
     elseif ($picture['error'] === 3 || $picture['error'] > 4) {
         $msg_error = "problème pendant l'upload";
     } else {
-        if($picture['error'] === 4) {
-            $picture_name = 'generic.jpg';
+        if ($picture['error'] === 4) {
+            $msg_error = "veuillez ajouter une image";
+            header("Location: admin?msg=$msg_error&error=true");
         } else {
-            echo "deuxième couche";
             if ($picture['size'] > 4194304) {
                 $msg_error = "taille du fichier trop grand";
             }
             elseif (!in_array(strtolower(pathinfo($picture['name'], PATHINFO_EXTENSION)), $ext)) {
                 $msg_error = "le fichier n'est pas une image";
             } else {
-                echo "troisième couche";
                 $picture_name = uniqid() . '_' . $picture['name'];
                 $img_folder = dirname(dirname(__DIR__)) . '/src/img/';
                 @mkdir($img_folder, 0777);
@@ -98,6 +97,7 @@ if(in_array('', $fields_required)) {
                         );
                         $return = update($data);
                     } else {
+                        $picture = html($picture_name);
                         $data = array(
                             'nom' => $name,
                             'annee' => $year,

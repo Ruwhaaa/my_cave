@@ -221,7 +221,10 @@ form > a {
 }
 
 footer {
-    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 140px;
     opacity: 0.9;
     margin-top: 300px;
     width: 100%;
@@ -262,6 +265,48 @@ main > h2 {
     margin-top: 120px;
 }
 
+#bottom {
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#bottom > ul {
+    list-style: none;
+}
+
+#bottom > ul > li > a {
+    color: #FFFAFA;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+#bottom > ul > li > a:hover {
+    transition: .4s;
+    color: #0c0c0c;
+}
+
+#bottom > ul > li {
+    line-height: 25px;
+    font-weight: 700;
+}
+
+footer > #bottom > h2 {
+    font-family: "Roboto Condensed", sans-serif;
+    letter-spacing: 0.5px;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.my-footer {
+    color: #FFFAFA;
+}
+
+.cave-black {
+    color: #0c0c0c;
+}
+
 @media (max-width: 500px) {
     #searchbar {
         display: flex;
@@ -285,6 +330,7 @@ main > h2 {
         margin-left: 0px;
         margin-top: 15px;
     }
+
 }
 
 @media (max-width: 1000px) {
@@ -366,5 +412,10 @@ main > h2 {
         margin-left: 0;
         margin-bottom: 20px;
         text-align: center;
+    }
+
+    #bottom {
+        width: 100%;
+        justify-content: space-evenly;
     }
 }

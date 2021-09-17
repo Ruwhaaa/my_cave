@@ -15,7 +15,6 @@ $length = count($response);
 <main>
     <h2>Bienvenue dans l'interface Admin</h2>
     <section id="searchbar">
-        <?php var_dump($_SESSION) ?>
         <form action="search&page=admin" method="POST" id="add" enctype="multipart/form-data">
             <label for="search">
                 <input type="text" name="search" id="search" placeholder="tappez ici la boutaille recherché" required>
